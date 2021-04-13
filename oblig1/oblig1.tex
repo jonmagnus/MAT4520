@@ -1,0 +1,59 @@
+\documentclass[english]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath, amssymb}
+\usepackage{todonotes}
+
+\DeclareMathOperator{\id}{id}
+
+\author{Jon-Magnus Rosenblad}
+\date{April 2021}
+\title{MAT4520 -- Mandatory Assignment 1}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+\subsection*{(a)}
+Bilinearity of $\langle\cdot,\cdot\rangle$ follows from bilinearity of $\wedge$ and linearity of $\star$.
+By bilinearity it is sufficient to check symmetry for the elements in our basis.
+The case of $k=0$ and $k=3$ are trivial, so we proceed with $k=1$.
+We see by anti-commutativity and associativity of $\wedge$
+that $e_i^\ast \wedge \star e_j^\ast =0$ unless $i=j$.
+In all three nontrivial cases we see that $e_i^\ast\wedge\star e_i\ast=e_1^\ast\wedge e_2^\ast\wedge e_3^\ast$,
+so $\langle e_i^\ast,e_j^\ast\rangle$ is $1$ for $i=j$ and $0$ otherwise.
+
+\subsection*{(b)}
+Bilinearity and the characterization
+\begin{equation*}
+    \langle e_i^\ast, e_j^\ast\rangle = \begin{cases}
+        1 & i=j\\
+        0 & i\neq j
+    \end{cases}
+\end{equation*}
+from (a) gives positive-definiteness and that the standard basis is orthonormal.
+
+\subsection*{(c)}
+Bilinearity is again induced, and anti-commutativity is induced by the anti-commutativity of $\wedge$ and linearity of $\star$.
+
+\subsection*{(d)}
+\todo{}
+
+\section*{Problem 2}
+
+\subsection*{(a)}
+Reflexivity is immediate.
+Setting $\alpha=\gamma$ in our triangle relation $\phi{\alpha\gamma}(x)\circ \phi_{\gamma\beta}(x)\circ \phi_{\beta\alpha}(x)=\id$
+we get $\phi_{\alpha\beta}(x)\circ \phi_{\beta\alpha}(x) = \id$, and consequently $\phi_{\alpha\beta}(x)=\phi_{\beta\alpha}^{-1}$
+as well as the desired symmetry of our relation.
+Furthermore we may now rewrite our triangle relation as $\phi_{\alpha\beta}(x)\circ \phi_{\beta\gamma}(x) = \phi_{\alpha\gamma}(x)$ 
+and so we have transitivity of our relation, as desired.
+
+\subsection*{(b)}
+\todo{Use axioms of manifolds}
+
+\end{document}
