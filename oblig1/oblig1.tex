@@ -7,8 +7,10 @@
 \usepackage{microtype}
 \usepackage{amsmath, amssymb}
 \usepackage{todonotes}
+\usepackage{tikz-cd}
 
 \DeclareMathOperator{\id}{id}
+\newcommand{\restrict}[1]{\left.{#1}\right|}
 
 \author{Jon-Magnus Rosenblad}
 \date{April 2021}
@@ -41,19 +43,86 @@ from (a) gives positive-definiteness and that the standard basis is orthonormal.
 Bilinearity is again induced, and anti-commutativity is induced by the anti-commutativity of $\wedge$ and linearity of $\star$.
 
 \subsection*{(d)}
-\todo{}
+If we let $e_1^\ast,e_2^\ast,e_3^\ast$ be the positive orientation of the dual basis,
+we see that $[e_i^\ast,e_j^\ast]$ completes the right handed system.
+By linearity, this property extends to all dual vectors in $A_1(V)$.
+By the corresponding property of the cross product we see that 
+$[e_i^\ast,e_j^\ast](e_i\times e_j) = 1$,
+so in general we have $[u^\ast, v^\ast](u\times v)=1$ or $[u\ast, v\ast] = (u\times v)^\ast$.
 
 \section*{Problem 2}
 
+To use more apparent notation we use $\tau_{\beta\alpha}=\phi_{\beta\alpha}\colon U_{\beta\alpha}\to GL(n,\mathbb R)$,
+and $\phi_\alpha\colon U_\alpha\to \mathbb R^m$ with $m=\dim M$ as the chart-morphisms in the atlas.
+To follow the notation of the problem description we contract $\tau_{\beta\alpha}(x)=\tau_{\beta\alpha}$
+when working over some fixed point, and write $\tau_{\beta\alpha}(u_\alpha) = (\tau_{\beta\alpha}(x))(u_\alpha)$
+for the transfer of the vector $u_\alpha$ to the bundle over $U_\beta$.
+We will use composition of $(\tau_{\gamma\beta}(x))\circ(\tau_{\beta\alpha}(x))=\tau_{\gamma\beta}\circ\tau_{\beta\alpha}$
+as multiplication in $GL(n,\mathbb R)$ without confusion.
+
 \subsection*{(a)}
-Reflexivity is immediate.
-Setting $\alpha=\gamma$ in our triangle relation $\phi{\alpha\gamma}(x)\circ \phi_{\gamma\beta}(x)\circ \phi_{\beta\alpha}(x)=\id$
-we get $\phi_{\alpha\beta}(x)\circ \phi_{\beta\alpha}(x) = \id$, and consequently $\phi_{\alpha\beta}(x)=\phi_{\beta\alpha}^{-1}$
-as well as the desired symmetry of our relation.
-Furthermore we may now rewrite our triangle relation as $\phi_{\alpha\beta}(x)\circ \phi_{\beta\gamma}(x) = \phi_{\alpha\gamma}(x)$ 
-and so we have transitivity of our relation, as desired.
+Reflexivity is immediate from $\tau_{\alpha\beta}\circ\tau_{\beta\alpha}=\id$.
+For transitivity we rewrite $\tau_{\gamma\beta}\circ\tau_{\beta\alpha}\circ\tau_{\alpha\gamma}=\id$
+to $\tau_{\gamma\beta}\circ\tau_{\beta\alpha}=\tau_{\gamma\alpha}$ 
+by multiplying with $\tau_{\gamma\alpha} = \tau_{\alpha\gamma}^{-1}$ on the right.
+It follows that 
+$\tau_{\beta\alpha}(u_\alpha)=v_\beta$ and $\tau_{\gamma\beta}(v_\beta)=w_\gamma$
+implies $(\tau_{\gamma\beta}\circ\tau_{\beta\alpha})(u_\alpha)=\tau_{\gamma\alpha}(u_\alpha)=w_\gamma$
+For symmetry, let $\tau_{\beta\alpha}(u_\alpha)=v_\beta$,
+so $\tau_{\alpha\beta}(v_\beta)=(\tau_{\alpha\beta}\circ\tau_{\beta\alpha})(u_\alpha)=u_\alpha$.
 
 \subsection*{(b)}
-\todo{Use axioms of manifolds}
+Fix $x\in M$.
+Let $\mathbb R^n_\alpha=\{x_\alpha\}\times\mathbb R^n$ be the fiber $x$ under the composite projection $p\circ \iota_\alpha$
+where $\iota_\alpha\colon U_\alpha\times\mathbb R^n\to E$ is the natural map induced from the inclusion into the disjoint union.
+Because $\{U_\alpha\}$ is a covering of $M$, there is some $U_\alpha$ containing $x$.
+Fix $\alpha$.
+For every $\beta$ with $U_\beta\ni x$ we have isomorphisms $\tau_{\beta\alpha}\colon \mathbb R^n_\alpha\xrightarrow{\sim}\mathbb R^n_\beta$
+as vector spaces.
+By the property $\tau_{\alpha\gamma}\circ\tau_{\gamma\beta}\circ\tau_{\beta\alpha}$ the restriction
+$\restrict{\iota_\alpha}_{\{x_\alpha\}}\colon \mathbb R^n_\alpha\to p^{-1}(x)$ induces a well defined vector space structure
+and becomes an isomorphism.
+
+\subsection*{(c)}
+By construction we have a natural covering of $E$ by the charts $U_\alpha\times R^n$ and morphisms
+\begin{equation*}
+        \tilde \phi_\alpha\colon\left\{\begin{aligned}
+            &U_\alpha\times \mathbb R^n 
+            &&\to \mathbb R^{m + n}\\
+            &[(x_\alpha,v_\alpha)]
+            &&\mapsto (\phi_\alpha(x_\alpha), v_\alpha)
+        \end{aligned}\right..
+\end{equation*}
+This gives $E$ the structure of a manifold.
+From the previous exercises we know that the change of representative $(x,u_\alpha)\sim (x,v_\beta)$ is related by
+$v_\beta=(\tau_{\beta\alpha}(x))(u_\alpha)$.
+Our transfer maps are therefore described by
+\begin{equation*}
+    \tilde \phi_\beta\circ\tilde\phi_\alpha^{-1}\colon (\phi_\alpha(x),u_\alpha)\mapsto (\phi_\beta(x),(\tau_{\beta\alpha}(x))(u_\beta)).
+\end{equation*}
+Because $\tau_{\beta\alpha}$ is smooth and $\tau_{\beta\alpha}(x)\in GL(n,\mathbb R)$ is linear,
+the curried map
+\begin{equation*}
+    \tilde\tau_{\beta\alpha}\colon \left\{\begin{aligned}
+        &\phi_\alpha(U_{\beta\alpha})\times \mathbb R^n
+        &&\to \mathbb R^n\\
+        &(\phi_\alpha(x),u_\alpha)
+        &&\mapsto (\tau_{\beta\alpha}(x))(u_\alpha)
+    \end{aligned}
+    \right.
+\end{equation*}
+is smooth when fixing either component, and therefore smooth.
+Because $\phi_\beta\circ\phi_\alpha^{-1}$ is smooth as well, $\tilde\phi_\beta\circ\tilde\phi_\alpha^{-1}$ is smooth,
+and so the manifold $E$ is smooth.
+
+\subsection*{(d)}
+We induce a basis on our tangent bundles $TU_\alpha$ by using the coordinate axes $de_1,\ldots,de_n$.
+Our transfer maps $\tau_{\beta\alpha}\colon U_{\beta\alpha}\to GL(n,\mathbb R)$ map
+$x$ to the linearization of $\phi_\beta\circ\phi_\alpha^{-1}$ at $\phi_\alpha(x)$.
+Let $\psi_{\beta\alpha}=\phi_\beta\circ \phi_\alpha^{-1}$, so $\tau_{\beta\alpha}\colon x\mapsto J_x\psi_{\beta\alpha}$.
+We have $\psi_{\alpha\beta}\circ\psi_{\beta\alpha}$ and $\psi_{\alpha\gamma}\circ\psi_{\gamma\beta}\circ\psi_{\beta\alpha}=\id$,
+so the linearization $J_x\psi_{\beta\alpha}$ satisfies the same property at any point $x$.
+Our collection $\{TU_\alpha\}$ together with the transfer maps $\{\tau_{\beta\alpha}\}$ have the desired structure described above,
+and defines an $n$-dimensional vector bundle.
 
 \end{document}
